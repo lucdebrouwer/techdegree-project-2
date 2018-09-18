@@ -1,16 +1,20 @@
 // Define scope variables
-let studentList = document.getElementsByTagName('ul')[0];
-let pages = Math.ceil(studentList.children.length / 10);
-console.log(pages);
+let studentList = document.querySelector('.student-list');
+let students = studentList.children.length;
+let pages = Math.ceil(students / 10);
+let maxOnPage = 10;
 
 
 /* arguments for page number and student list */
-function showPage(pageNumber, list) {
+function showPage(list, page) {
     // First hide all students on the page
-    studentList.style.display = 'none';
+    for(i = 0; i < students.children.length; i += 1) 
+    {
+        students[i].style.display = 'none';
+    }
     // then loop through all students in our student list argument
           // if student should be on this page number         
-            // show the student          
+            // show the student
 }
 function appendPageLinks(students) { 
     // determine how many pages for this student list
@@ -25,4 +29,4 @@ function appendPageLinks(students) {
     }
 
     
-    showPage(pages, studentList);
+    showPage(students, pages);
