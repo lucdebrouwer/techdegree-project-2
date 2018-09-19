@@ -3,19 +3,32 @@ let studentList = document.querySelector('.student-list');
 let students = studentList.children.length;
 console.log(typeof(students));
 let pages = Math.ceil(students / 10);
-let maxOnPage = 10;
-
-
+let perPage = 10;
+let currPage = 1;
 /* arguments for page number and student list */
 function showPage(list, page) {
+    let max = perPage * currPage; // 10 * 1 = 10
+    let min = max - perPage; // 10 - 10 = 0
     // First hide all students on the page
     for(i = 0; i < list.children.length; i += 1) 
     {
         list.children[i].style.display = 'none';
+        
+        for(i < min; i < max; i += 1) 
+        {
+            if(list.children[i] >= max && list.children[i] <= min) 
+            {
+                list.children[i].style.display = 'block';
+            }
+        }
     }
-    // then loop through all students in our student list argument
-          // if student should be on this page number         
-            // show the student
+    // if the index of a list item is >= the index of the first item that should be shown on the page,
+    // && the list item indedx is <= of the last item that should be shown on the page, show it.
+
+
+
+
+    // else hide
 }
 function appendPageLinks(students) { 
     // determine how many pages for this student list
