@@ -10,15 +10,15 @@ function showPage(list, page) {
     let max = perPage * currPage; // 10 * 1 = 10
     let min = max - perPage; // 10 - 10 = 0
     // First hide all students on the page
-    for(i = 0; i < list.children.length; i += 1) 
+    for(let i = 0; i < list.children.length; i += 1) 
     {
         list.children[i].style.display = 'none';
         
-        for(i < min; i < max; i += 1) 
+        for(let j = min; j < max; j += 1) 
         {
-            if(list.children[i] >= max && list.children[i] <= min) 
+            if(list.children[j] >= list.children[min] && list.children[j] <= list.children[max]) 
             {
-                list.children[i].style.display = 'block';
+                list.children[j].style.display = 'block';
             }
         }
     }
