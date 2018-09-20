@@ -27,15 +27,34 @@ function showPage(list, page) {
 
 
 
-
+appendPageLinks();
     // else hide
 }
-function appendPageLinks(students) { 
+function appendPageLinks() { 
     // determine how many pages for this student list
+    const page = document.querySelector('.page');
+    const pagination = document.createElement('div');
+    const paginationUl = document.createElement('ul');
+
+    for(i = 0; i < pages; i += 1) 
+    {
+        const anchorLi = document.createElement('li');
+        const anchors = document.createElement('a');
+        anchors.textContent = i;
+        
+        paginationUl.className = 'pagination';
+        paginationUl.appendChild(anchorLi);
+        anchorLi.appendChild(anchors);
+        pagination.appendChild(paginationUl);
+    }
+
+    page.appendChild(pagination);
+
     // create a page link section
     // "for" every page
     // add a page link to the page link section
     // remove the old page link section from the site
+
     // append our new page link section to the site
     // define what happens when you click a link (event listener)
     // Use showPage to display the page for the link clicked
