@@ -16,7 +16,7 @@ function showPage(list, page) {
         
         for(let j = min; j < max; j += 1) 
         {
-            if(list.children[j] >= list.children[min] && list.children[j] <= list.children[max]) 
+            if(list.children[i] >= list.children[min] && list.children[i] <= list.children[max]) 
             {
                 list.children[j].style.display = 'block';
             }
@@ -27,7 +27,7 @@ function showPage(list, page) {
 
 
 
-appendPageLinks();
+
     // else hide
 }
 function appendPageLinks() { 
@@ -40,8 +40,14 @@ function appendPageLinks() {
     {
         const anchorLi = document.createElement('li');
         const anchors = document.createElement('a');
-        anchors.textContent = i;
-        
+        anchors.innerHTML = i;
+        anchors.addEventListener('click', (event) => {
+            // If page is clicked reset min and max
+            anchors.setAttribute('href', showPage(studentList, event.target));
+            page.removeChild(anchorLi);
+            //console.log(event.target);
+        });
+
         paginationUl.className = 'pagination';
         paginationUl.appendChild(anchorLi);
         anchorLi.appendChild(anchors);
@@ -61,5 +67,5 @@ function appendPageLinks() {
     // mark that link as "active"
     }
 
-    
+    appendPageLinks();
     showPage(studentList, pages);
