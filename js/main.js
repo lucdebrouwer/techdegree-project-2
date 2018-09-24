@@ -16,18 +16,14 @@ function showPage(list, page) {
         
         for(let j = min; j < max; j += 1) 
         {
+            // if the index of a list item is >= the index of the first item that should be shown on the page,
+            // && the list item index is <= of the last item that should be shown on the page, show it.
             if(list.children[i] >= list.children[min] && list.children[i] <= list.children[max]) 
             {
                 list.children[j].style.display = 'block';
             }
         }
     }
-    // if the index of a list item is >= the index of the first item that should be shown on the page,
-    // && the list item indedx is <= of the last item that should be shown on the page, show it.
-
-
-
-
     // else hide
 }
 function appendPageLinks() { 
@@ -37,9 +33,8 @@ function appendPageLinks() {
     pagination.addEventListener('click', (event) => {
         //console.log(event);
         if(event.target.tagName == 'A') 
-        {
+        {         
             showPage(studentList, page)
-            console.log('test');
         }
             // If page is clicked reset min and max
             
