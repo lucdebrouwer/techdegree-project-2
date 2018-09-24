@@ -34,6 +34,18 @@ function appendPageLinks() {
     // determine how many pages for this student list
     const page = document.querySelector('.page');
     const pagination = document.createElement('div');
+    pagination.addEventListener('click', (event) => {
+        //console.log(event);
+        if(event.target.tagName == 'A') 
+        {
+            showPage(studentList, page)
+            console.log('test');
+        }
+            // If page is clicked reset min and max
+            
+
+
+    });
     const paginationUl = document.createElement('ul');
 
     for(i = 0; i < pages; i += 1) 
@@ -41,12 +53,6 @@ function appendPageLinks() {
         const anchorLi = document.createElement('li');
         const anchors = document.createElement('a');
         anchors.innerHTML = i;
-        anchors.addEventListener('click', (event) => {
-            // If page is clicked reset min and max
-            anchors.setAttribute('href', showPage(studentList, event.target));
-            page.removeChild(anchorLi);
-            //console.log(event.target);
-        });
 
         paginationUl.className = 'pagination';
         paginationUl.appendChild(anchorLi);
