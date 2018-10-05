@@ -1,9 +1,16 @@
-// Define scope variables
-let studentList = document.querySelector('.student-list');
-let students = studentList.children.length;
+// Select required DOM element
+const studentList = document.querySelector('.student-list');
+const students = studentList.children.length;
+// Dynamically create the elements needed
+const page = document.querySelector('.page');
+const paginationUl = document.createElement('ul');
+const pagination = document.createElement('div');
+
+// Define page logic
 let pages = Math.ceil(students / 10);
 let perPage = 10;
 let currPage = 1;
+
 /* arguments for page number and student list */
 function showPage(list, page) {
     let max = page * perPage - 1 ; // 10 * 1 = 10
@@ -19,14 +26,39 @@ function showPage(list, page) {
             list.children[i].style.display = 'block';
         }     
     }
-    console.log(min, max)
+    //console.log(min, max)
 }
-function appendPageLinks() { 
-    // determine how many pages for this student list
-    const page = document.querySelector('.page');
-    const pagination = document.createElement('div');
+function appendPageLinks(links) { 
+    /* Uses links as argument to determine the amount of pageLinks to create */
+    for(i = 0; i < links; i += 1) 
+    {
+        const anchorLi = document.createElement('li');
+        const anchors = document.createElement('a');
+        anchors.innerHTML = i + 1;
+
+        paginationUl.className = 'pagination';
+
+        // Append each individual element to its parent
+        paginationUl.appendChild(anchorLi);
+        anchorLi.appendChild(anchors);
+        pagination.appendChild(paginationUl);
+    }
+
+    
+     // add an event listener to the pagination div
+     // use event delegation to target the a tags
+
     pagination.addEventListener('click', (event) => {
-        
+
+        // Select all the anchor tags in the nodeList
+        const aTags = document.querySelectorAll('a');
+
+        // Remove all existing active classes
+        // Set active when clicked
+        for (let i = 0; i < aTags.length; i += 1) {
+            aTags[i].classList.remove("active");
+            event.target.classList.add("active");
+      }
         // Determine which link has been clicked
         if(event.target.tagName == 'A') 
         {                    
@@ -34,33 +66,8 @@ function appendPageLinks() {
         }
     });
 
-    
-    const paginationUl = document.createElement('ul');
-    for(i = 0; i < pages; i += 1) 
-    {
-        const anchorLi = document.createElement('li');
-        const anchors = document.createElement('a');
-        
-        anchors.innerHTML = i + 1;
-
-        paginationUl.className = 'pagination';
-        paginationUl.appendChild(anchorLi);
-        anchorLi.appendChild(anchors);
-        pagination.appendChild(paginationUl);
-    }
-
     page.appendChild(pagination);
-
-    // create a page link section
-    // "for" every page
-    // add a page link to the page link section
-    // remove the old page link section from the site
-
-    // append our new page link section to the site
-    // define what happens when you click a link (event listener)
-    // Use showPage to display the page for the link clicked
-    // mark that link as "active"
     }
 
-    appendPageLinks();
+    appendPageLinks(pages);
     showPage(studentList, currPage);
