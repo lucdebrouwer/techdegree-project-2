@@ -1,53 +1,47 @@
 // Define scope variables
 let studentList = document.querySelector('.student-list');
 let students = studentList.children.length;
-console.log(typeof(students));
 let pages = Math.ceil(students / 10);
 let perPage = 10;
 let currPage = 1;
 /* arguments for page number and student list */
 function showPage(list, page) {
-    let max = perPage * currPage; // 10 * 1 = 10
-    let min = max - perPage; // 10 - 10 = 0
+    let max = page * perPage - 1 ; // 10 * 1 = 10
+    let min = page * perPage - perPage // 10 - 10 = 0
     // First hide all students on the page
     for(let i = 0; i < list.children.length; i += 1) 
     {
-        list.children[i].style.display = 'none';
-        
-        for(let j = min; j < max; j += 1) 
+        list.children[i].style.display = 'none';  
+         // if the index of a list item is >= the index of the first item that should be shown on the page,
+        // && the list item index is <= of the last item that should be shown on the page, show it.
+        if(i >= min && i <= max) 
         {
-            // if the index of a list item is >= the index of the first item that should be shown on the page,
-            // && the list item index is <= of the last item that should be shown on the page, show it.
-            if(list.children[i] >= list.children[min] && list.children[i] <= list.children[max]) 
-            {
-                list.children[j].style.display = 'block';
-            }
-        }
+            list.children[i].style.display = 'block';
+        }     
     }
-    // else hide
+    console.log(min, max)
 }
 function appendPageLinks() { 
     // determine how many pages for this student list
     const page = document.querySelector('.page');
     const pagination = document.createElement('div');
     pagination.addEventListener('click', (event) => {
-        //console.log(event);
+        
+        // Determine which link has been clicked
         if(event.target.tagName == 'A') 
-        {         
-            showPage(studentList, page)
+        {                    
+            showPage(studentList, event.target.innerHTML);
         }
-            // If page is clicked reset min and max
-            
-
-
     });
-    const paginationUl = document.createElement('ul');
 
+    
+    const paginationUl = document.createElement('ul');
     for(i = 0; i < pages; i += 1) 
     {
         const anchorLi = document.createElement('li');
         const anchors = document.createElement('a');
-        anchors.innerHTML = i;
+        
+        anchors.innerHTML = i + 1;
 
         paginationUl.className = 'pagination';
         paginationUl.appendChild(anchorLi);
@@ -69,4 +63,4 @@ function appendPageLinks() {
     }
 
     appendPageLinks();
-    showPage(studentList, pages);
+    showPage(studentList, currPage);
