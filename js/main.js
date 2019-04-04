@@ -6,6 +6,31 @@ const page = document.querySelector('.page');
 const paginationUl = document.createElement('ul');
 const pagination = document.createElement('div');
 
+const pageHeader = document.querySelector('.page-header');
+
+
+
+const makeElement = (element, attribute, value, text) => {
+    const el = document.createElement(element);
+    el.setAttribute(attribute, value);
+    if(text != null) {
+        el.textContent = text;
+    }
+    return el;
+}
+
+const searchDiv = makeElement('div', 'class', 'student-search');
+const input = makeElement('input', 'placeholder', 'Search for students...');
+const button = makeElement('button', 'id', 'btn-search', 'Search');
+
+searchDiv.appendChild(input);
+searchDiv.appendChild(button);
+pageHeader.appendChild(searchDiv);
+
+
+
+
+
 // Define page logic
 let pages = Math.ceil(students / 10);
 let perPage = 10;
@@ -42,9 +67,7 @@ function appendPageLinks(links) {
         paginationUl.appendChild(anchorLi);
         anchorLi.appendChild(anchors);
         pagination.appendChild(paginationUl);
-    }
-
-    
+    } 
      // add an event listener to the pagination div
      // use event delegation to target the a tags
 
